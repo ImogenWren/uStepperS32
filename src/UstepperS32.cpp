@@ -98,7 +98,7 @@ void UstepperS32::setup(uint8_t mode,
 	
 	if (setHome == true)
 	{
-		encoder.setHome();
+		//encoder.setHome(); // Changed Imogen Heard 28/02/25
 	}
 
 	if (mode == DROPIN)

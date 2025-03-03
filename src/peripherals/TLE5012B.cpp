@@ -27,8 +27,8 @@ void TLE5012B::init()
 	this->spiHandle.engageMosi();
 	
 	this->sample();
-	this->encoderOffset = this->angle;
-	this->angle = 0;
+	//this->encoderOffset = 0; // this->angle;
+	this->angle = readAngle();
 	this->angleMoved = 0;
 	this->sample();
 }
@@ -181,6 +181,16 @@ void TLE5012B::setHome(float initialAngle)
 	this->angleMoved = CONVERTENCODERANGLETORAW(initialAngle);
 	this->velocityEstimator.reset();
 	mainTimerStart();
+}
+
+void TLE5012B::setHomeActual(uint16_t encoderVal){
+	mainTimerPause();
+	ptr->driver.getVelocity();
+	this->encoderOffset = encoderVal;
+	this->angle = 0;
+	//this->angleMoved = CONVERTENCODERANGLETORAW(initialAngle); // no idea what this is doing just removing it
+	this->velocityEstimator.reset();
+	mainTimerStart();	
 }
 
 uint16_t TLE5012B::getAngleRaw()

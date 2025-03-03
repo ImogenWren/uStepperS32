@@ -23,6 +23,7 @@ class TLE5012B
 	void init();
 	float getAngle();
 	void setHome(float initialAngle = 0);
+	void setHomeActual(uint16_t encoderVal);
 	uint16_t getAngleRaw();
 	float getAngleMoved(bool filtered = true);
 	int32_t getAngleMovedRaw(bool filtered = true);
